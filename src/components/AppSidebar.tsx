@@ -4,20 +4,27 @@ import { motion } from "framer-motion";
 import {
   LayoutDashboard,
   ArrowRightLeft,
-  Wallet,
-  Shield,
+  Receipt,
+  Users,
+  ShieldAlert,
   LogOut,
   Landmark,
+  Shield,
 } from "lucide-react";
 
-const navItems = [
-  { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { to: "/transfer", label: "Transfer", icon: ArrowRightLeft },
+const navConfig = [
+  { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard, roles: ["Customer", "Manager", "Admin"] },
+  { to: "/transfer", label: "Transfer", icon: ArrowRightLeft, roles: ["Customer", "Manager", "Admin"] },
+  { to: "/transactions", label: "Transactions", icon: Receipt, roles: ["Customer", "Manager", "Admin"] },
+  { to: "/manager", label: "Manager Panel", icon: Users, roles: ["Manager", "Admin"] },
+  { to: "/admin", label: "Admin Panel", icon: ShieldAlert, roles: ["Admin"] },
 ];
 
 export const AppSidebar = () => {
   const { user, logout } = useAuth();
   const location = useLocation();
+
+  const navItems = navConfig.filter(item => user?.role && item.roles.includes(user.role));
 
   return (
     <motion.aside
@@ -32,7 +39,7 @@ export const AppSidebar = () => {
             <Landmark className="w-5 h-5 text-primary-foreground" />
           </div>
           <div>
-            <h1 className="font-bold text-foreground text-sm">Kodnest Bank</h1>
+            <h1 className="font-bold text-foreground text-sm">Kodbank</h1>
             <p className="text-[10px] text-muted-foreground">Secure Banking</p>
           </div>
         </div>
@@ -76,6 +83,9 @@ export const AppSidebar = () => {
             <p className="text-[10px] text-muted-foreground truncate">{user?.email}</p>
           </div>
           <div className="flex items-center gap-1">
+            <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold ${user?.role === "Admin" ? "bg-destructive/15 text-destructive" : user?.role === "Manager" ? "bg-primary/15 text-primary" : "bg-accent/15 text-accent"}`}>
+              {user?.role}
+            </span>
             <Shield className="w-3 h-3 text-accent" />
           </div>
         </div>
