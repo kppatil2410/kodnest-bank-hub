@@ -120,9 +120,12 @@ const Login = () => {
               </motion.p>
             )}
 
-            <p className="text-xs text-muted-foreground">
-              Demo: john@example.com / password123
-            </p>
+            <div className="text-xs text-muted-foreground space-y-0.5">
+              <p className="font-medium">Demo accounts:</p>
+              <p>Customer: john@example.com / password123</p>
+              <p>Manager: manager@kodbank.com / manager123</p>
+              <p>Admin: admin@kodbank.com / admin123</p>
+            </div>
 
             <button
               type="submit"

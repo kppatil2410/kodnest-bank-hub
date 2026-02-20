@@ -132,6 +132,23 @@ const Dashboard = () => {
           </motion.button>
         </div>
 
+        {/* View Transactions Button */}
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.35 }}
+          onClick={() => navigate("/transactions")}
+          className="w-full glass-card p-4 text-left hover-lift group cursor-pointer mb-8 flex items-center gap-4"
+        >
+          <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+            <CreditCard className="w-5 h-5 text-primary" />
+          </div>
+          <div>
+            <h3 className="font-semibold text-foreground text-sm">View Transaction History</h3>
+            <p className="text-xs text-muted-foreground">See all past transfers and receipts</p>
+          </div>
+        </motion.button>
+
         {/* Quick Stats */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
